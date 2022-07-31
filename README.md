@@ -1,12 +1,17 @@
-# Lunch Train - [View Demo](lunch-train.vercel.app)
+# Lunch Train - [View Demo](https://lunch-train.vercel.app/)
+Demo app so I can learn the T3 stack.
+#### Inspired by the [Lunch train slack app](https://slack.com/apps/A1BES823B-lunch-train).
 
 ![alt text](screenshot.png "Lunch train screenshot")
 
 -------
 
-#### Inspired by the [Lunch train slack app](https://slack.com/apps/A1BES823B-lunch-train).
-
-Just a throwaway app to lean about the T3 stack, most notibly [TRPC](https://trpc.io/) (which is actually amazing btw) with Prisma, NextJS and PlanetScale for the DB.
+#### Tech
+- React with NextJS
+- PlanetScale for the db
+- Hosted by Vercel
+- Prisma for the ORM
+- tRPC for backend.
 
 ### Todo
 - [x] Some error handling.
