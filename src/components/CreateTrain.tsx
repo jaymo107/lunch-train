@@ -15,6 +15,7 @@ const CreateTrain = (props: CreateTrainProps) => {
 
     const [destination, setDestination] = useState('');
     const [departsAt, setDepartsAt] = useState('');
+    const [error, setError] = useState('');
 
     const getDate = (date: string): Date|null => {
         const parsedDate = parse(date, "HH:mm", new Date());
@@ -24,15 +25,15 @@ const CreateTrain = (props: CreateTrainProps) => {
     const addTrain = (e: Event): void => {
         e.preventDefault();
 
-        if (!destination || !departsAt) { 
-            console.log('NO destination set');
-            return;
-        }
-
         const departingDate = getDate(departsAt);
 
         if (!departingDate) {
-            console.log('NO DATE SET');
+            setError('Please enter a valid departure time in 24hr format, e.g. 13:30');
+            return;
+        }
+
+        if (departingDate.getTime() < new Date().getTime()) {
+            setError('Departure time must be in the future');
             return;
         }
 
@@ -40,13 +41,19 @@ const CreateTrain = (props: CreateTrainProps) => {
             destination,
             departsAt: departingDate,
         });
-
+        
+        setError('');
         setDestination('');
         setDepartsAt('');
     };
 
     return (
         <form className="flex flex-col" onSubmit={addTrain}>
+            {error && <p
+                className="text-red-500 text-sm bg-red-50 px-5 py-3 border-b border-red-500 mb-4"
+            >
+                {error}
+            </p>}
             <div>
                 <input
                     type="text"
@@ -55,6 +62,7 @@ const CreateTrain = (props: CreateTrainProps) => {
                     placeholder="Departs at... e.g. 13:49"
                     value={departsAt}
                     onChange={(e) => setDepartsAt(e.target.value)}
+                    required
                 />
             </div>
             <div className="flex space-x-3">
