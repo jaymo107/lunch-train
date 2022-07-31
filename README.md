@@ -1,4 +1,4 @@
-# Lunch Train - [View Demo](https://lunch-train-b49uxzczr-jaymo107.vercel.app/)
+# Lunch Train - [View Demo](lunch-train.vercel.app)
 
 ![alt text](screenshot.png "Lunch train screenshot")
 
