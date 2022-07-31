@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   };
 
   const addPassenger = (passenger: Passenger, train: Train): void => {
-    const newTrains = trains.map((t: Train) => {
+    const newTrains = trains.map((t: any) => {
       if (t.id === train.id) {
         return { ...t, passengers: [...t.passengers, passenger] };
       }
