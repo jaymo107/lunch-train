@@ -9,8 +9,11 @@ Just a throwaway app to lean about the T3 stack, most notibly [TRPC](https://trp
 Using the `create-t3-app` starter cli, found at [Init.tips](https://init.tips/)
 
 ### Todo
+- [x] Some error handling.
 - [ ] Remove yourself from a train.
 - [ ] Add your own name when you board.
 - [ ] Departure push notifications.
 - [ ] Delays to departure.
 - [ ] Where the meeting place is?
+- [ ] Only delete trains you've created.
+- [ ] Delay your own train.
