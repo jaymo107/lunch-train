@@ -3,9 +3,10 @@ import { trpc } from "../utils/trpc";
 import { formatDistanceToNow } from 'date-fns';
 import { Passenger, Train } from "@prisma/client";
 import PassengerComponent from "./Passenger";
+import { TrainWithPassengers } from "../server/db/client";
 
 interface TrainProps {
-    train: Train;
+    train: TrainWithPassengers;
     removeTrain: (id: number) => void;
     addPassenger: (passenger: Passenger, train: Train) => void;
 }
