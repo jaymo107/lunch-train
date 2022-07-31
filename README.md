@@ -1,8 +1,10 @@
-# Lunch Train
-
-### Inspired by the [Lunch train slack app](https://slack.com/apps/A1BES823B-lunch-train).
+# Lunch Train - [View Demo](https://lunch-train-b49uxzczr-jaymo107.vercel.app/)
 
 ![alt text](screenshot.png "Lunch train screenshot")
+
+-------
+
+#### Inspired by the [Lunch train slack app](https://slack.com/apps/A1BES823B-lunch-train).
 
 Just a throwaway app to lean about the T3 stack, most notibly [TRPC](https://trpc.io/) (which is actually amazing btw) with Prisma and NextJS.
 
