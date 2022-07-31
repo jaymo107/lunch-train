@@ -6,9 +6,7 @@
 
 #### Inspired by the [Lunch train slack app](https://slack.com/apps/A1BES823B-lunch-train).
 
-Just a throwaway app to lean about the T3 stack, most notibly [TRPC](https://trpc.io/) (which is actually amazing btw) with Prisma and NextJS.
-
-Using the `create-t3-app` starter cli, found at [Init.tips](https://init.tips/)
+Just a throwaway app to lean about the T3 stack, most notibly [TRPC](https://trpc.io/) (which is actually amazing btw) with Prisma, NextJS and PlanetScale for the DB.
 
 ### Todo
 - [x] Some error handling.
