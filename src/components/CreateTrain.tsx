@@ -22,7 +22,7 @@ const CreateTrain = (props: CreateTrainProps) => {
         return isValid(parsedDate) ? parsedDate : null;
     };
 
-    const addTrain = (e: Event): void => {
+    const addTrain = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
         const departingDate = getDate(departsAt);
