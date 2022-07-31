@@ -5,6 +5,7 @@ import TrainComponent from "../components/Train";
 import { useState } from "react";
 import { trpc } from "../utils/trpc";
 import { Passenger, Train } from "@prisma/client";
+import { TrainWithPassengers } from "../server/db/client";
 
 const Home: NextPage = () => {
   const { data: allTrains } = trpc.useQuery(['train.getAll']);
@@ -43,9 +44,9 @@ const Home: NextPage = () => {
         <h3 className="border-b border-gray-200 pb-5 text-xl">Timetable</h3>
         {trains.length <= 0 && <p className="p-5 text-gray-300 uppercase italic">No trains to board</p>}
         {trains.map(
-          (train: any) => <TrainComponent
+          (train: Train) => <TrainComponent
             key={train.destination}
-            train={train}
+            train={train as TrainWithPassengers}
             removeTrain={removeTrain}
             addPassenger={addPassenger}
           />
