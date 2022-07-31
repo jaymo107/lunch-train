@@ -42,6 +42,9 @@ export const trainRouter = createRouter()
     .query("getAll", {
         resolve({ ctx }) {
             return ctx.prisma.train.findMany({
+                orderBy: {
+                    departsAt: "desc"
+                },
                 include: {
                     passengers: true,
                 }
