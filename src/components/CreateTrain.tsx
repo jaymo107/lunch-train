@@ -9,8 +9,14 @@ interface CreateTrainProps {
 }
 
 const CreateTrain = (props: CreateTrainProps) => {
+    const context = trpc.useContext();
+
     const add = trpc.useMutation(['train.add'], {
-        onSuccess: (data: Train): void => props.addTrain(data)
+        onSuccess: (data: Train): void => {
+            context.invalidateQueries(['train.getAll']);
+            console.log('INVALIDATE CACHE');
+            //props.addTrain(data)
+        }
     });
 
     const [destination, setDestination] = useState('');
