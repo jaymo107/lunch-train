@@ -1,5 +1,7 @@
 # Lunch Train - [View Demo](https://lunch-train.vercel.app/)
 Demo app so I can learn the T3 stack.
+
+![Vercel](https://vercelbadge.vercel.app/api/jaymo107/lunch-train?style=for-the-badge)
 #### Inspired by the [Lunch train slack app](https://slack.com/apps/A1BES823B-lunch-train).
 
 ![alt text](screenshot.png "Lunch train screenshot")
@@ -16,7 +18,7 @@ Demo app so I can learn the T3 stack.
 ### Todo
 - [x] Some error handling.
 - [ ] Remove yourself from a train.
-- [ ] Add your own name when you board.
+- [x] Add your own name when you board.
 - [ ] Departure push notifications.
 - [ ] Delays to departure.
 - [ ] Where the meeting place is?
