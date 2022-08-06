@@ -85,7 +85,7 @@ const Train = (props: TrainProps) => {
                 </div>
             </div>
             <div className="text-xs flex space-x-3">
-                {props.train.passengers.map((passenger: Passenger): JSX.Element => { 
+                {!hasDeparted() && props.train.passengers.map((passenger: Passenger): JSX.Element => { 
                     return (
                         <PassengerComponent
                             key={`${passenger.name}_${passenger.id}`}
