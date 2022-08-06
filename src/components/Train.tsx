@@ -5,6 +5,8 @@ import { Passenger, Train } from "@prisma/client";
 import PassengerComponent from "./Passenger";
 import { TrainWithPassengers } from "../server/db/client";
 import Notifier, { Permission } from '../common/notifications/notifier';
+import { useEffect, useState } from "react";
+import Loading from "../common/Loading";
 
 interface TrainProps {
     train: TrainWithPassengers;
@@ -14,11 +16,11 @@ interface TrainProps {
 }
 
 const Train = (props: TrainProps) => {
-    const { mutate: remove } = trpc.useMutation(['train.delete'], {
+    const { mutate: remove, isLoading: isRemoving } = trpc.useMutation(['train.delete'], {
         onSuccess: (): void => props.removeTrain(props.train.id)
     });
 
-    const { mutate: board } = trpc.useMutation(['passenger.board'], {
+    const { mutate: board, isLoading: isBoarding } = trpc.useMutation(['passenger.board'], {
         onSuccess: (passenger: Passenger): void => {
             props.addPassenger(passenger, props.train);
          }
@@ -80,8 +82,14 @@ const Train = (props: TrainProps) => {
                     <span className="text-xs font-extralight text-gray-500">{
                         hasDeparted() ? 'Departed' : `Departs in ${formatDistanceToNow(props.train.departsAt)}`}
                     </span>
-                    <Button disabled={false} onClick={deleteTrain}>X</Button>
-                    {canBoard() && <Button disabled={false} onClick={boardTrain}>Board</Button>}
+                    <Button disabled={false} onClick={deleteTrain}>
+                        {isRemoving ? <Loading /> : 'X'}
+                    </Button>
+                    {canBoard() && <Button
+                        disabled={false}
+                        onClick={boardTrain}>
+                        {isBoarding ? <Loading /> : 'Board'}
+                    </Button>}
                 </div>
             </div>
             <div className="text-xs flex space-x-3">

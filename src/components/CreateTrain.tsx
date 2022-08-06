@@ -3,13 +3,14 @@ import { trpc } from "../utils/trpc";
 import Button from "./Button";
 import { parse, isValid } from "date-fns";
 import { Train } from "@prisma/client";
+import Loading from "../common/Loading";
 
 interface CreateTrainProps {
     addTrain: (train: Train) => void;
 }
 
 const CreateTrain = (props: CreateTrainProps) => {
-    const add = trpc.useMutation(['train.add'], {
+    const { mutate: add, isLoading } = trpc.useMutation(['train.add'], {
         onSuccess: (data: Train): void => props.addTrain(data)
     });
 
@@ -37,7 +38,7 @@ const CreateTrain = (props: CreateTrainProps) => {
             return;
         }
 
-        add.mutate({
+        add({
             destination: destination.trim(),
             departsAt: departingDate,
         });
@@ -75,7 +76,9 @@ const CreateTrain = (props: CreateTrainProps) => {
                     onChange={(e) => setDepartsAt(e.target.value.trim() )}
                     required
                 />
-                <Button disabled={!departsAt || !destination}>Create train</Button>
+            <Button disabled={!departsAt || !destination}>
+                {isLoading ? <Loading /> : 'Create Train'}
+            </Button>
         </form>
     );
 };

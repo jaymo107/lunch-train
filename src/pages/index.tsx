@@ -7,6 +7,7 @@ import { Passenger, Train } from "@prisma/client";
 import { TrainWithPassengers } from "../server/db/client";
 import MyNameComponent from "../components/MyName";
 import TimetableComponent from "../components/Timetable";
+import Loading from "../common/Loading";
 
 const Home: NextPage = () => {
   const { data: allTrains } = trpc.useQuery(['train.getAll']);
