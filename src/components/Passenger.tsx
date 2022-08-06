@@ -1,8 +1,21 @@
 import { Passenger } from "@prisma/client"
 
-const Passenger = (props: Passenger) => {
+interface PassengerProps {
+    passenger: Passenger;
+    myName: string;
+}
+
+const Passenger = (props: PassengerProps) => {
+    const isMe = () => {
+        return props.myName === props.passenger.name;
+    };
+    
     return (
-        <span>{props.name}</span>
+        <span className={
+            isMe() ? 'text-green-500' : ''
+        }>
+            {props.passenger.name}
+        </span>
     )
 };
 

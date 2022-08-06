@@ -87,7 +87,8 @@ const Train = (props: TrainProps) => {
                     return (
                         <PassengerComponent
                             key={`${passenger.name}_${passenger.id}`}
-                            {...passenger}
+                            passenger={passenger}
+                            myName={props.passengerName}
                         />
                     );
                 })}
