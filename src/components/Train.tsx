@@ -10,6 +10,7 @@ interface TrainProps {
     train: TrainWithPassengers;
     removeTrain: (id: number) => void;
     addPassenger: (passenger: Passenger, train: Train) => void;
+    passengerName: string;
 }
 
 const Train = (props: TrainProps) => {
@@ -37,8 +38,7 @@ const Train = (props: TrainProps) => {
         }
 
         if (permission === Permission.Granted) { 
-            board({ train: props.train.id, name: 'Me' });
-            notifier.notify('There has been a delay on your departure to ' + props.train.destination + ', it will be ready in ' + formatDistanceToNow(new Date(props.train.departsAt)));
+            board({ train: props.train.id, name: props.passengerName });
         }
     };
 
