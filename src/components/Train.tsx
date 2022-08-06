@@ -69,13 +69,15 @@ const Train = (props: TrainProps) => {
     };
 
     return (
-        <div className={`flex flex-col w-3/6 p-4 rounded ${hasDeparted() ? 'bg-white' : 'bg-gray-50'}`}>
+        <div
+            className={`w-full flex flex-col p-4 rounded ${hasDeparted() ? 'bg-white' : 'bg-gray-50'}`}
+        >
             <div className="flex justify-between items-center">
                 <h3 className={`text-md font-semibold ${hasDeparted() ? 'text-gray-300' : 'text-gray-700'}`}>
                     {props.train.destination}
                 </h3>
                 <div className="flex space-x-4 items-center">
-                    <span className="text-sm font-light text-gray-500">{
+                    <span className="text-xs font-extralight text-gray-500">{
                         hasDeparted() ? 'Departed' : `Departs in ${formatDistanceToNow(props.train.departsAt)}`}
                     </span>
                     <Button disabled={false} onClick={deleteTrain}>X</Button>

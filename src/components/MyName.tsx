@@ -29,7 +29,7 @@ export default function MyNameComponent(props: MyNameProps): JSX.Element {
     };
 
     return (
-        <div className="flex">
+        <div className="flex flex-col">
             <input
                 type="text"
                 name="destination"

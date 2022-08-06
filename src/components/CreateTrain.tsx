@@ -48,13 +48,15 @@ const CreateTrain = (props: CreateTrainProps) => {
     };
 
     return (
-        <form className="flex flex-col" onSubmit={addTrain}>
+        <form
+            className="flex flex-col"
+            onSubmit={addTrain}
+        >
             {error && <p
                 className="text-red-500 text-sm bg-red-50 px-5 py-3 border-b border-red-500 mb-4"
             >
                 {error}
             </p>}
-            <div>
                 <input
                     type="text"
                     name="destination"
@@ -64,8 +66,6 @@ const CreateTrain = (props: CreateTrainProps) => {
                     onChange={(e) => setDestination(e.target.value)}
                     required
                 />
-            </div>
-            <div className="flex space-x-3">
                 <input
                     type="text"
                     className="px-4 py-2 bg-gray-50 rounded mb-2"
@@ -76,7 +76,6 @@ const CreateTrain = (props: CreateTrainProps) => {
                     required
                 />
                 <Button disabled={!departsAt || !destination}>Create train</Button>
-            </div>
         </form>
     );
 };

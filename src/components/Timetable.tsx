@@ -33,15 +33,16 @@ export default function TimetableComponent(props: TimetableProps): JSX.Element {
     }
 
     return (
-      <React.Fragment>
-        <h3 className="border-b border-gray-200 pb-5 text-xl">Timetable</h3>
-        {trains.map(
-            (train: Train) => <TrainComponent
-                key={train.destination}
-                train={train as TrainWithPassengers}
-                {...props}
-            />
-          )}
+        <React.Fragment>
+            <div className="space-y-4">
+                {trains.map(
+                    (train: Train) => <TrainComponent
+                        key={train.destination}
+                        train={train as TrainWithPassengers}
+                        {...props}
+                    />
+                )}
+            </div>
       </React.Fragment>
     );
 }

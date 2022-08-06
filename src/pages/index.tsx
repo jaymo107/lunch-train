@@ -54,10 +54,24 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto flex flex-col items-center justify-center h-screen p-4 space-y-4">
-        <h1 className="text-xl text-blue-400 font-extrabold border-b border-b-blue-500 pb-4">LUNCH TRAIN</h1>
-        <MyNameComponent name={name} setName={setName} />
-        {name && <CreateTrain addTrain={addTrain} />}
+      <main className="w-4/6 m-auto mt-6 space-y-4 text-gray-800">
+        <div className="grid grid-cols-6 bg-gray-50 border-b-2 border-b-gray-200 rounded-xl p-6">
+          <div className="col-span-6 items-center justify-center flex">
+            <span className="font-bold text-3xl">
+              Lunch train
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-6 bg-gray-100 border-b-2 border-b-gray-200 rounded-xl p-6">
+          <div className="col-span-6 items-center">
+            {name
+              ? <CreateTrain addTrain={addTrain} />
+              : <MyNameComponent name={name} setName={setName} />
+            }
+          </div>
+        </div>
+
         {name && <TimetableComponent
           trains={trains as TrainWithPassengers[]}
           passengerName={name}
@@ -67,6 +81,6 @@ const Home: NextPage = () => {
       </main>
     </React.Fragment>
   );
-};
+}
 
 export default Home;
