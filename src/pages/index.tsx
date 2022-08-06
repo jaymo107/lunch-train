@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import CreateTrain from '../components/CreateTrain';
-import TrainComponent from "../components/Train";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { trpc } from "../utils/trpc";
 import { Passenger, Train } from "@prisma/client";
 import { TrainWithPassengers } from "../server/db/client";
 import MyNameComponent from "../components/MyName";
+import TimetableComponent from "../components/Timetable";
 
 const Home: NextPage = () => {
   const { data: allTrains } = trpc.useQuery(['train.getAll']);
@@ -27,7 +27,7 @@ const Home: NextPage = () => {
       localStorage.setItem('lunch-train-name', name);
     }
   }, [name]);
-
+  
   const addTrain = (train: Train): void => {
     setTrains([...trains, train]);
   };
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <>
+    <React.Fragment>
       <Head>
         <title>Lunch Train</title>
         <meta name="description" content="Let's go for lunch." />
@@ -57,20 +57,15 @@ const Home: NextPage = () => {
       <main className="container mx-auto flex flex-col items-center justify-center h-screen p-4 space-y-4">
         <h1 className="text-xl text-blue-400 font-extrabold border-b border-b-blue-500 pb-4">LUNCH TRAIN</h1>
         <MyNameComponent name={name} setName={setName} />
-        <CreateTrain addTrain={addTrain} />
-        <h3 className="border-b border-gray-200 pb-5 text-xl">Timetable</h3>
-        {trains.length <= 0 && <p className="p-5 text-gray-300 uppercase italic">No trains to board</p>}
-        {trains.map(
-          (train: Train) => <TrainComponent
-            key={train.destination}
-            train={train as TrainWithPassengers}
-            removeTrain={removeTrain}
-            addPassenger={addPassenger}
-            passengerName={name}
-          />
-        )}
+        {name && <CreateTrain addTrain={addTrain} />}
+        {name && <TimetableComponent
+          trains={trains as TrainWithPassengers[]}
+          passengerName={name}
+          removeTrain={removeTrain}
+          addPassenger={addPassenger}
+        />}
       </main>
-    </>
+    </React.Fragment>
   );
 };
 
