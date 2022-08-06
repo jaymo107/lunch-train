@@ -2,15 +2,19 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import CreateTrain from '../components/CreateTrain';
 import TrainComponent from "../components/Train";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { trpc } from "../utils/trpc";
 import { Passenger, Train } from "@prisma/client";
 import { TrainWithPassengers } from "../server/db/client";
 
 const Home: NextPage = () => {
   const { data: allTrains } = trpc.useQuery(['train.getAll']);
-  
+
   const [trains, setTrains] = useState<Train[]>(allTrains ?? []);
+
+  useEffect(() => {
+    console.log('RUNNING EFFECT');
+  }, []);
   
   const addTrain = (train: Train): void => {
     setTrains([...trains, train]);

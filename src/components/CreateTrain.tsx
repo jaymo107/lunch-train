@@ -57,26 +57,26 @@ const CreateTrain = (props: CreateTrainProps) => {
             <div>
                 <input
                     type="text"
-                    className="px-4 py-2 bg-gray-50 rounded mb-2 w-full"
+                    name="destination"
+                    placeholder="Train destination..."
+                    className="px-4 py-2 bg-gray-50 rounded w-full mb-3"
+                    value={destination}
+                    onChange={(e) => setDestination(e.target.value)}
+                    required
+                />
+            </div>
+            <div className="flex space-x-3">
+                <input
+                    type="text"
+                    className="px-4 py-2 bg-gray-50 rounded mb-2"
                     name="departsAt"
                     placeholder="Departs at... e.g. 13:49"
                     value={departsAt}
                     onChange={(e) => setDepartsAt(e.target.value)}
                     required
                 />
-            </div>
-            <div className="flex space-x-3">
-            <input
-                type="text"
-                name="destination"
-                placeholder="Train destination..."
-                className="px-4 py-2 bg-gray-50 rounded"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                required
-            />
                 <Button>Create train</Button>
-                </div>
+            </div>
         </form>
     );
 };
