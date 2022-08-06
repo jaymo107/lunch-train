@@ -62,14 +62,14 @@ const CreateTrain = (props: CreateTrainProps) => {
                     type="text"
                     name="destination"
                     placeholder="Train destination..."
-                    className="px-4 py-2 bg-gray-50 rounded w-full mb-3"
+                    className="px-4 py-2 bg-white w-full mb-3"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
                     required
                 />
                 <input
                     type="text"
-                    className="px-4 py-2 bg-gray-50 rounded mb-2"
+                    className="px-4 py-2 rounded mb-2"
                     name="departsAt"
                     placeholder="Departs at... e.g. 13:49"
                     value={departsAt}

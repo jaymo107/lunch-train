@@ -7,7 +7,7 @@ type ButtonProps = {
 const Button = (props: ButtonProps) => {
     return (
         <button
-            className="flex items-center bg-gray-200 self-start text-gray-700 px-4 py-2 rounded hover:bg-gray-300 active:bg-gray-400 disabled:bg-gray-100 disabled:text-gray-300"
+            className="flex items-center bg-gray-200 self-start text-gray-700 px-4 py-2 rounded hover:bg-gray-300 active:bg-gray-400 disabled:bg-gray-50 disabled:text-gray-300"
             onClick={props.onClick}
             disabled={props.disabled}
         >

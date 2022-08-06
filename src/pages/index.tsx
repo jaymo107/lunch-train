@@ -64,7 +64,7 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-6 bg-gray-100 border-b-2 border-b-gray-200 rounded-xl p-6">
+        <div className="grid grid-cols-6 border-b-2 bg-gray-50 border-b-gray-200 rounded-xl p-6">
           <div className="col-span-6 items-center">
             {name
               ? <CreateTrain addTrain={addTrain} />
