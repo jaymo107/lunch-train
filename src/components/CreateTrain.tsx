@@ -61,7 +61,7 @@ const CreateTrain = (props: CreateTrainProps) => {
                     placeholder="Train destination..."
                     className="px-4 py-2 bg-gray-50 rounded w-full mb-3"
                     value={destination}
-                    onChange={(e) => setDestination(e.target.value)}
+                    onChange={(e) => setDestination(e.target.value.trim())}
                     required
                 />
             </div>
@@ -72,10 +72,10 @@ const CreateTrain = (props: CreateTrainProps) => {
                     name="departsAt"
                     placeholder="Departs at... e.g. 13:49"
                     value={departsAt}
-                    onChange={(e) => setDepartsAt(e.target.value)}
+                    onChange={(e) => setDepartsAt(e.target.value.trim() )}
                     required
                 />
-                <Button>Create train</Button>
+                <Button disabled={!departsAt || !destination}>Create train</Button>
             </div>
         </form>
     );
