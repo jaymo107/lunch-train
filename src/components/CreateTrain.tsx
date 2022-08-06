@@ -38,7 +38,7 @@ const CreateTrain = (props: CreateTrainProps) => {
         }
 
         add.mutate({
-            destination,
+            destination: destination.trim(),
             departsAt: departingDate,
         });
         
@@ -61,7 +61,7 @@ const CreateTrain = (props: CreateTrainProps) => {
                     placeholder="Train destination..."
                     className="px-4 py-2 bg-gray-50 rounded w-full mb-3"
                     value={destination}
-                    onChange={(e) => setDestination(e.target.value.trim())}
+                    onChange={(e) => setDestination(e.target.value)}
                     required
                 />
             </div>

@@ -78,8 +78,8 @@ const Train = (props: TrainProps) => {
                     <span className="text-sm font-light text-gray-500">{
                         hasDeparted() ? 'Departed' : `Departs in ${formatDistanceToNow(props.train.departsAt)}`}
                     </span>
-                    <Button onClick={deleteTrain}>X</Button>
-                    {canBoard() && <Button onClick={boardTrain}>Board</Button>}
+                    <Button disabled={false} onClick={deleteTrain}>X</Button>
+                    {canBoard() && <Button disabled={false} onClick={boardTrain}>Board</Button>}
                 </div>
             </div>
             <div className="text-xs flex space-x-3">

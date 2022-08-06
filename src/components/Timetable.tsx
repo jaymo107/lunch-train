@@ -1,7 +1,8 @@
 import { Passenger, Train } from "@prisma/client";
-import React from "react";
+import React, { useEffect } from "react";
 import { TrainWithPassengers } from "../server/db/client";
 import TrainComponent from "./Train";
+import collect from 'collect.js';
 
 interface TimetableProps {
     trains: TrainWithPassengers[];
@@ -11,10 +12,22 @@ interface TimetableProps {
 }
 
 export default function TimetableComponent(props: TimetableProps): JSX.Element {
-    if (props.trains.length <= 0) {
+    const [trains, setTrains] = React.useState<TrainWithPassengers[]>([]);
+
+    useEffect(() => {
+        const [upcoming, past]: Array<any> = collect(props.trains)
+            .partition(train => train.departsAt > new Date());
+
+        setTrains([
+            ...upcoming.sortBy('departsAt'),
+            ...past.sortByDesc('departsAt'),
+        ]);
+    }, [props.trains]);
+
+    if (trains.length <= 0) {
         return (
             <p className="p-5 text-gray-300 uppercase italic">
-                No trains to board
+                No trains yet.
             </p>
         );
     }
@@ -22,7 +35,7 @@ export default function TimetableComponent(props: TimetableProps): JSX.Element {
     return (
       <React.Fragment>
         <h3 className="border-b border-gray-200 pb-5 text-xl">Timetable</h3>
-        {props.trains.map(
+        {trains.map(
             (train: Train) => <TrainComponent
                 key={train.destination}
                 train={train as TrainWithPassengers}
