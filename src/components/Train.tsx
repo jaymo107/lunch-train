@@ -32,6 +32,11 @@ const Train = (props: TrainProps) => {
         const notifier = new Notifier();
         const permission = await notifier.hasPermission();
 
+        if (props.passengerName.trim() === '') { 
+            alert('Please set your name so we know who you are!');
+            return;
+        }
+
         if (permission === Permission.Denied) { 
             alert('You need to allow notifications to board a train');
             return;
@@ -42,8 +47,25 @@ const Train = (props: TrainProps) => {
         }
     };
 
+    const hasAlreadyBoarded = (passengerName: string, train: TrainWithPassengers): Boolean => {
+        let found = false;
+
+        train.passengers.forEach((passenger: Passenger) => {
+            if (passenger.name === passengerName) {
+                found = true;
+            }
+        });
+
+        return found;
+    };
+
     const hasDeparted = (): Boolean => {
         return props.train.departsAt < new Date();
+    };
+
+    const canBoard = (): Boolean => {
+        return !hasDeparted()
+            && !hasAlreadyBoarded(props.passengerName, props.train);
     };
 
     return (
@@ -57,7 +79,7 @@ const Train = (props: TrainProps) => {
                         hasDeparted() ? 'Departed' : `Departs in ${formatDistanceToNow(props.train.departsAt)}`}
                     </span>
                     <Button onClick={deleteTrain}>X</Button>
-                    {!hasDeparted() && <Button onClick={boardTrain}>Board</Button>}
+                    {canBoard() && <Button onClick={boardTrain}>Board</Button>}
                 </div>
             </div>
             <div className="text-xs flex space-x-3">
