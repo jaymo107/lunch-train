@@ -48,16 +48,15 @@ export default class Notifier {
         return 'Notification' in window;
     }
 
-    async getNotificationToken() { 
-        getToken(this.messaging, { vapidKey: this.vapidKey }).then(token => {
-            if (token) {
-                console.log('GOT TOKEN: ',token);
-            } else {
-                this.requestPermission();
-            }
-        }).catch(err => {
-            console.log('ERROR: ',err);
-        });
+    getNotificationToken() { 
+        return getToken(this.messaging, { vapidKey: this.vapidKey })
+            .then(async token => {
+                if (token) {
+                    return token;
+                }
+                
+                await this.requestPermission();
+            });
     }
 
     private requestPermission(): Promise<string> {
