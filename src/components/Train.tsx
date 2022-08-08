@@ -52,6 +52,8 @@ const Train = (props: TrainProps) => {
                 return;
             }
 
+            console.log(vapidPublicKey);
+
             board({
                 train: props.train.id,
                 name: props.passengerName,
