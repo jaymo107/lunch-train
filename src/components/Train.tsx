@@ -47,7 +47,11 @@ const Train = (props: TrainProps) => {
         if (permission === Permission.Granted) {
             const vapidPublicKey = await notifier.getNotificationToken();
 
-            console.log('HELLO KEY IS: ', vapidPublicKey);
+            if (!vapidPublicKey) {
+                alert('Could not get notification token');
+                return;
+            }
+
             board({
                 train: props.train.id,
                 name: props.passengerName,
