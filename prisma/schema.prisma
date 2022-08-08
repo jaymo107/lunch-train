@@ -7,7 +7,7 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
+    provider = "sqlite"
     url      = env("DATABASE_URL")
     referentialIntegrity = "prisma"
 }
@@ -16,7 +16,6 @@ model Train {
     id   Int    @id @default(autoincrement())
     destination String
     departsAt DateTime
-    deletedAt DateTime?
     passengers Passenger[]
 }
 

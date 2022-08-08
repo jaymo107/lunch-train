@@ -44,7 +44,8 @@ const Train = (props: TrainProps) => {
             return;
         }
 
-        if (permission === Permission.Granted) { 
+        if (permission === Permission.Granted) {
+            await notifier.getNotificationToken();
             board({ train: props.train.id, name: props.passengerName });
         }
     };

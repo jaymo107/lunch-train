@@ -1,6 +1,7 @@
 import { createRouter } from "./context";
 import { z } from "zod";
 import { Train } from "@prisma/client";
+import { subDays } from 'date-fns';
 
 export const trainRouter = createRouter()
 
@@ -41,7 +42,12 @@ export const trainRouter = createRouter()
      */
     .query("getAll", {
         resolve({ ctx }) {
+            const cutOffDate = subDays(new Date(), 2);
+
             return ctx.prisma.train.findMany({
+                where: {
+                    departsAt: { gte: cutOffDate },
+                },
                 orderBy: {
                     departsAt: "desc"
                 },
