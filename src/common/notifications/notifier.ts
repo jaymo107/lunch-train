@@ -28,11 +28,23 @@ export default class Notifier {
         this.messaging = getMessaging(app);
         this.vapidKey = 'BL17wxZUvw_t0TLhwPAJIZCF-o997e8cD7WqoJHK0EOoGVJ6blVZjXiH6ZXVzHL3-jrt9wFWPYd7gSVp8z8LnQE';
     }
+
+    async hasPermission(): Promise<string> {
+        if (!this.hasBrowserSupport()) {
+            return Promise.resolve(Permission.Denied);
+        }
+
+        return this.requestPermission();
+    }
     
     notify(title: string, message: string): void {
         this.notifications.push(new Notification(title, {
             body: message,
         }));
+    }
+
+    private hasBrowserSupport(): boolean {
+        return 'Notification' in window;
     }
 
     getNotificationToken() { 
