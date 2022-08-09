@@ -14,8 +14,6 @@ export const passengerRouter = createRouter()
             vapidPublicKey: z.string(),
         }),
         async resolve({ ctx, input }) {
-            // const notifier = new Notifier();
-            
             const passenger: Passenger = await ctx.prisma.passenger.create({
                 data: {
                     trainId: input.train,

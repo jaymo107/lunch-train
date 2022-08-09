@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, Messaging, getToken } from 'firebase/messaging';
-import { env } from 'process';
+import { getMessaging, Messaging, getToken, onMessage } from 'firebase/messaging';
 
 
 export enum Permission {
@@ -27,15 +26,7 @@ export default class Notifier {
         });
 
         this.messaging = getMessaging(app);
-        this.vapidKey = env.VAPID_TOKEN;
-    }
-
-    async hasPermission(): Promise<string> {
-        if (!this.hasBrowserSupport()) {
-            return Promise.resolve(Permission.Denied);
-        }
-
-        return this.requestPermission();
+        this.vapidKey = 'BL17wxZUvw_t0TLhwPAJIZCF-o997e8cD7WqoJHK0EOoGVJ6blVZjXiH6ZXVzHL3-jrt9wFWPYd7gSVp8z8LnQE';
     }
     
     notify(title: string, message: string): void {
@@ -44,22 +35,30 @@ export default class Notifier {
         }));
     }
 
-    private hasBrowserSupport(): boolean {
-        return 'Notification' in window;
-    }
-
     getNotificationToken() { 
         return getToken(this.messaging, { vapidKey: this.vapidKey })
             .then(async token => {
                 if (token) {
                     return token;
                 }
-                
+
                 await this.requestPermission();
             });
     }
 
     private requestPermission(): Promise<string> {
         return Notification.requestPermission();
+    }
+
+    onMessage(): void {
+        console.log('On message called');
+        onMessage(this.messaging, (payload) => {
+            console.log('Message received. ', payload);
+            if (!payload.notification?.title || !payload.notification?.body) {
+                return;
+            }
+
+            this.notify(payload.notification.title, payload.notification.body);
+        });
     }
 }
