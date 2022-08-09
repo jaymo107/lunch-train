@@ -1,7 +1,6 @@
 import { createRouter } from "./context";
 import { z } from 'zod';
 import { Passenger } from "@prisma/client";
-import Notifier from "../notifications/notifier";
 
 export const passengerRouter = createRouter()
     /**
