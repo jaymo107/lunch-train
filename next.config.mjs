@@ -15,4 +15,7 @@ function defineNextConfig(config) {
 export default defineNextConfig({
   reactStrictMode: true,
   swcMinify: true,
+  publicRuntimeConfig: {
+    oneSignalAppId: process.env.ONE_SIGNAL_APP_ID,
+  }
 });

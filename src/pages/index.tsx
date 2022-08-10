@@ -7,11 +7,9 @@ import { Passenger, Train } from "@prisma/client";
 import { TrainWithPassengers } from "../server/db/client";
 import MyNameComponent from "../components/MyName";
 import TimetableComponent from "../components/Timetable";
-import OneSignal from 'react-onesignal';
+import { initOneSignal } from "../common/hooks/useOneSignal";
 
-OneSignal.init({ appId: "0439033a-dc65-4c05-b107-575cfb4ff6af" }).then(() => {
-    OneSignal.showSlidedownPrompt({ force: true });
-});
+initOneSignal();
 
 const Home: NextPage = () => {
   const { data: allTrains } = trpc.useQuery(['train.getAll']);
