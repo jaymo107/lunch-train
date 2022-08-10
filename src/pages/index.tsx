@@ -7,6 +7,7 @@ import { Passenger, Train } from "@prisma/client";
 import { TrainWithPassengers } from "../server/db/client";
 import MyNameComponent from "../components/MyName";
 import TimetableComponent from "../components/Timetable";
+import OneSignal from 'react-onesignal';
 
 const Home: NextPage = () => {
   const { data: allTrains } = trpc.useQuery(['train.getAll']);
@@ -14,8 +15,16 @@ const Home: NextPage = () => {
   const [trains, setTrains] = useState<Train[]>(allTrains ?? []);
   const [name, setName] = useState<string>('');
 
+
   useEffect(() => {
     const storedName = localStorage.getItem('lunch-train-name');
+
+
+    OneSignal.init({ appId: "0439033a-dc65-4c05-b107-575cfb4ff6af", }).then(() => {
+      OneSignal.showSlidedownPrompt();
+    });
+
+    // client.createNotification();
 
     if (storedName !== null) {
       setName(storedName);

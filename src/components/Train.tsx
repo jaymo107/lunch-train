@@ -4,8 +4,6 @@ import { formatDistanceToNow } from 'date-fns';
 import { Passenger, Train } from "@prisma/client";
 import PassengerComponent from "./Passenger";
 import { TrainWithPassengers } from "../server/db/client";
-import Notifier, { Permission } from '../common/notifications/notifier';
-import { useEffect, useState } from "react";
 import Loading from "../common/Loading";
 
 interface TrainProps {
@@ -31,33 +29,30 @@ const Train = (props: TrainProps) => {
     };
 
     const boardTrain = async (): Promise<void> => {
-        const notifier = new Notifier();
-        const permission = await notifier.hasPermission();
-
         if (props.passengerName.trim() === '') { 
             alert('Please set your name so we know who you are!');
             return;
         }
 
-        if (permission === Permission.Denied) { 
-            alert('You need to allow notifications to board a train');
-            return;
-        }
+        // if (permission === Permission.Denied) { 
+        //     alert('You need to allow notifications to board a train');
+        //     return;
+        // }
 
-        if (permission === Permission.Granted) {
-            const vapidPublicKey = await notifier.getNotificationToken();
+        // if (permission === Permission.Granted) {
+        //     const vapidPublicKey = await notifier.getNotificationToken();
 
-            if (!vapidPublicKey) {
-                alert('Could not get notification token');
-                return;
-            }
+        //     if (!vapidPublicKey) {
+        //         alert('Could not get notification token');
+        //         return;
+        //     }
 
-            console.log(vapidPublicKey);
+        //     console.log(vapidPublicKey);
 
             board({
                 train: props.train.id,
                 name: props.passengerName,
-                vapidPublicKey,
+                vapidPublicKey: '',
             });
         }
     };
