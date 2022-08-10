@@ -49,12 +49,11 @@ const Train = (props: TrainProps) => {
 
         //     console.log(vapidPublicKey);
 
-            board({
-                train: props.train.id,
-                name: props.passengerName,
-                vapidPublicKey: '',
-            });
-        }
+        board({
+            train: props.train.id,
+            name: props.passengerName,
+            vapidPublicKey: '',
+        });
     };
 
     const hasAlreadyBoarded = (passengerName: string, train: TrainWithPassengers): Boolean => {
